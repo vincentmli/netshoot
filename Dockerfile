@@ -69,6 +69,9 @@ RUN set -ex \
 # Installing httpie ( https://httpie.io/docs#installation)
 RUN pip3 install --upgrade httpie
 
+# Installing ecapture - eBPF SSL/TLS uprobe
+COPY --from=fetcher /tmp/ecapture /usr/local/bin/ecapture
+
 # Installing ctop - top-like container monitor
 COPY --from=fetcher /tmp/ctop /usr/local/bin/ctop
 

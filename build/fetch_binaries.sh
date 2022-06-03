@@ -18,6 +18,14 @@ case $ARCH in
         ;;
 esac
 
+#https://github.com/ehids/ecapture/releases/download/v0.2.2/ecapture-v0.2.2-linux-x86_64.tar.gz
+get_ecapture() {
+  VERSION=$(get_latest_release ehids/ecapture | sed -e 's/^v//')
+  ARCHX86="linux-x86_64"
+  LINK="https://github.com/ehids/ecapture/releases/download/v${VERSION}/ecapture-v${VERSION}-${ARCHX86}.tar.gz"
+  wget "$LINK" -O /tmp/ecapture-v${VERSION}-${ARCHX86}.tar.gz && tar zxvf /tmp/ecapture-v${VERSION}-${ARCHX86}.tar.gz && cp  ecapture-v${VERSION}-${ARCHX86}/ecapture /tmp/ecapture && chmod +x /tmp/ecapture
+}
+
 get_ctop() {
   VERSION=$(get_latest_release bcicen/ctop | sed -e 's/^v//')
   LINK="https://github.com/bcicen/ctop/releases/download/v${VERSION}/ctop-${VERSION}-linux-${ARCH}"
@@ -51,6 +59,7 @@ get_termshark() {
   esac
 }
 
+get_ecapture
 get_ctop
 get_calicoctl
 get_termshark
